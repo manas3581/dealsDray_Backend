@@ -32,3 +32,12 @@ app.get("/", (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log(`Server is running at port ${process.env.PORT}`.bgCyan.white);
 });
+
+app.get('/api/v1/employee/get-employee-count', async (req, res) => {
+  try {
+    const count = await Employee.countDocuments(); // Assuming Employee is your Mongoose model
+    res.status(200).json({ success: true, count });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error fetching employee count" });
+  }
+});
